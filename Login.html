@@ -1,0 +1,54 @@
+<html>
+<head>
+<style type="text/css">    
+        body{    
+            font-family: "Times New Roman", Times, serif;  
+	    background-image: url("background.jpg");
+        } 
+	center{
+	    border: 5px solid black; 
+	    background: white; 
+            width: 700px;    
+		margin: 20px auto;
+	}   
+        input[type="text"] {    
+            width: 250px; 
+	    background: white;   
+        }    
+        form{    
+            text-align: center;    
+            font-family: "Times New Roman", Times, serif;    
+            font-size: 20px;    
+            border: 5px solid black; 
+	    background: white; 
+            width: 600px;    
+            margin: 20px auto;    
+        }    
+</style>    
+<script>
+function showBooks(str) {
+    if (str.length == 0) {
+        document.getElementById("Books").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("Books").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "getbooks.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script>
+</head>
+<body>
+
+<center><h1 style="color:Red;">National Institute of Technology, Tirchirappalli Library</h1></center>    
+<form>
+Book Name: <input type="text" onkeyup="showBooks(this.value)">
+</form>
+<center><div id="Books"><b>Search for books</b></div></center>
+</body>
+</html>
